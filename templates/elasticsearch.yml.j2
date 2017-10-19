@@ -95,3 +95,21 @@ http.port: {{ elasticsearch_http_port }}
 # action.destructive_requires_name: true
 script.inline: {{ elasticsearch_script_inline }}
 script.indexed: {{ elasticsearch_script_indexed }}
+
+{% if elasticsearch_cluster_name is defined %}cluster.name: {{ elasticsearch_cluster_name }}{% endif %}
+
+{% if elasticsearch_node_name is defined %}node.name: {{ elasticsearch_node_name }}{% endif %}
+
+{% if elasticsearch_node_master is defined %}node.master: {{ elasticsearch_node_master }}{% endif %}
+
+{% if elasticsearch_node_data is defined %}node.data: {{ elasticsearch_node_data }}{% endif %}
+
+# https://www.elastic.co/guide/en/elasticsearch/plugins/2.3/cloud-aws-discovery.html
+# You must also set cloud.aws.region if you are not using default AWS region.
+
+{% if elasticsearch_cloud_aws_region is defined %}cloud.aws.region: {{ elasticsearch_cloud_aws_region }}{% endif %}
+
+
+{% if elasticsearch_yml is defined %}
+{{ elasticsearch_yml }}
+{% endif %}

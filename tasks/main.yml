@@ -14,6 +14,14 @@
     mode: 0750
   notify: restart elasticsearch
 
+- name: Install plugins
+  elasticsearch_plugin:
+    name: "{{ item }}"
+    plugin_bin: "{{ elasticsearch_home }}/bin/plugin"
+    plugin_dir: "{{ elasticsearch_home }}/plugins/"
+  with_items: "{{ elasticsearch_plugins }}"
+  notify: restart elasticsearch
+
 - name: Start Elasticsearch.
   service: name=elasticsearch state=started enabled=yes
 

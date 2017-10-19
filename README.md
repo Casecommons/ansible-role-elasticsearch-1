@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-elasticsearch.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-elasticsearch)
 
-An Ansible Role that installs Elasticsearch on RedHat/CentOS or Debian/Ubuntu.
+An Ansible Role that installs Elasticsearch (2.x on Debian, see `tasks/setup-Debian.yml` ) on RedHat/CentOS or Debian/Ubuntu.
 
 ## Requirements
 
@@ -10,6 +10,10 @@ Requires at least Java 7 (Java 8+ preferred). See [`geerlingguy.java`](https://g
 
 ## Role Variables
 Available variables are listed below, along with default values (see `defaults/main.yml`):
+
+    elasticsearch_package_name: 'elasticsearch=2.3.5'
+
+The exact name of the package to be installed (Debian only). Useful for installing versions besides the latest 2.x (2.4). Defaults to `elasticsearch`.
 
     elasticsearch_network_host: localhost
 
@@ -23,6 +27,25 @@ The port to listen for HTTP connections on.
     elasticsearch_script_indexed: true
 
 Whether to allow inline scripting against ElasticSearch. You should read the following link as there are possible security implications for enabling these options: [Enable Dynamic Scripting](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html#enable-dynamic-scripting). Available options include: `true`, `false`, and `sandbox`.
+
+    elasticsearch_plugins:
+      - cloud-aws
+
+List of plugins to install. Defaults to an empty list.
+
+    elasticsearch_cluster_name # sets cluster.name:
+    elasticsearch_node_name # sets node.name:
+    elasticsearch_node_master # sets node.master:
+    elasticsearch_node_data # sets node.data:
+    elasticsearch_cloud_aws_region # sets cloud.aws.region:
+
+Additional configuration variables populated in `elasticsearch.yml` if defined.
+
+    elasticsearch_yml: |
+      path.conf: /etc/elasticsearch
+      path.data: /var/lib/elasticsearch
+
+Additional configuration variables appended to at the end of `elasticsearch.yml`. See templates/elasticsearch.yml.j2. Note: It's a configuration error to repeat configuration options.
 
 ## Dependencies
 

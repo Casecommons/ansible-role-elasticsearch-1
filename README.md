@@ -33,7 +33,19 @@ Whether to allow inline scripting against ElasticSearch. You should read the fol
 
 List of plugins to install. Defaults to an empty list.
 
+    elasticsearch_cluster_name # sets cluster.name:
+    elasticsearch_node_name # sets node.name:
+    elasticsearch_node_master # sets node.master:
+    elasticsearch_node_data # sets node.data:
+    elasticsearch_cloud_aws_region # sets cloud.aws.region:
 
+Additional configuration variables populated in `elasticsearch.yml` if defined.
+
+    elasticsearch_yml: |
+      path.conf: /etc/elasticsearch
+      path.data: /var/lib/elasticsearch
+
+Additional configuration variables appended to at the end of `elasticsearch.yml`. See templates/elasticsearch.yml.j2. Note: It's a configuration error to repeat configuration options.
 
 ## Dependencies
 

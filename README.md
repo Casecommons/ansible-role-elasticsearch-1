@@ -24,6 +24,12 @@ The port to listen for HTTP connections on.
 
 Whether to allow inline scripting against ElasticSearch. You should read the following link as there are possible security implications for enabling these options: [Enable Dynamic Scripting](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html#enable-dynamic-scripting). Available options include: `true`, `false`, and `sandbox`.
 
+List of plugins to install.
+
+    elasticsearch_plugins:
+      - cloud-aws
+
+
 ## Dependencies
 
   - geerlingguy.java
